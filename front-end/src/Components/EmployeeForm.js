@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { createEmployee } from '../Redux/slice';
 import { states } from '../Data/States';
@@ -51,14 +51,16 @@ function Form() {
         setFirstName(''); setLastName(''); setStartDate(''); setDepartment(''); setBirthDate('')
         setStreet(''); setCity(''); setUsState(''); setZipCode('')
     }
+    
+    useEffect(() => {
+        const stateSelect = document.getElementById('state');
 
-    const stateSelect = document.getElementById('state');
-
-    states.forEach(function (state) {
-        const option = document.createElement('option');
-        option.value = state.abbreviation;
-        option.text = state.name;
-        stateSelect.appendChild(option);
+        states.forEach(function (state) {
+            const option = document.createElement('option');
+            option.value = state.abbreviation;
+            option.text = state.name;
+            stateSelect.appendChild(option);
+        })
     })
 
     return (
@@ -88,7 +90,7 @@ function Form() {
                         <input id="city" onChange={(e) => setCity(e.target.value)} value={city} />
                         <label htmlFor="state">State</label>
                         <select name="state" id="state" onChange={(e) => setUsState(e.target.value)} defaultValue={"stateSelect"}>
-                        <option value="stateSelect" disabled >Select state</option>
+                            <option value="stateSelect" disabled >Select state</option>
                         </select>
                         <label htmlFor="zip-code">Zip Code</label>
                         <input id="zip-code" type="number" onChange={(e) => setZipCode(e.target.value)} value={zipCode} />
