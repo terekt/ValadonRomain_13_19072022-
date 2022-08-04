@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import EmployeeForm from "../../components/EmployeeForm/EmployeeForm";
+import EmployeeForm from "../Components/EmployeeForm";
 
 function Home() {
     return (
