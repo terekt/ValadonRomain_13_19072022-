@@ -60,7 +60,7 @@ function Form() {
         if (!stateSelect.hasChildNodes()) {
             states.forEach(function (state) {
                 const option = document.createElement('option');
-                option.value = state.abbreviation;
+                option.value = state.value;
                 option.text = state.name;
                 stateSelect.appendChild(option);
             })
