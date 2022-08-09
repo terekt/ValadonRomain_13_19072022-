@@ -2,6 +2,7 @@ import { React, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { createEmployee } from '../Redux/slice';
 import { states } from '../Data/States';
+import { departments } from '../Data/Department';
 import { v4 as uuid } from 'uuid';
 
 function Form() {
@@ -51,28 +52,37 @@ function Form() {
         setFirstName(''); setLastName(''); setStartDate(''); setDepartment(''); setBirthDate('')
         setStreet(''); setCity(''); setUsState(''); setZipCode('')
     }
-    
+
     useEffect(() => {
         const stateSelect = document.getElementById('state');
+        const departmentSelect = document.getElementById('department');
 
-        states.forEach(function (state) {
-            const option = document.createElement('option');
-            option.value = state.abbreviation;
-            option.text = state.name;
-            stateSelect.appendChild(option);
-        })
+        if (!stateSelect.hasChildNodes()) {
+            states.forEach(function (state) {
+                const option = document.createElement('option');
+                option.value = state.abbreviation;
+                option.text = state.name;
+                stateSelect.appendChild(option);
+            })
+        }
+
+        if (!departmentSelect.hasChildNodes()) {
+            departments.forEach(function (item) {
+                const option = document.createElement('option');
+                option.text = item.name;
+                option.value = item.name;
+                departmentSelect.appendChild(option);
+            })
+        }
     })
 
     return (
 
         <div>
-
-            <br /><br />
             <div className="container">
                 <h2>Create Employee</h2>
                 <form action="#" id="create-employee">
-                    <fieldset className="address">
-                        <legend>Infos</legend>
+                    <div className="infos">
                         <label htmlFor="first-name" >First Name</label>
                         <input id="first-name" onChange={(e) => setFirstName(e.target.value)} value={firstName} />
                         <label htmlFor="last-name">Last Name</label>
@@ -81,7 +91,7 @@ function Form() {
                         <input id="date-of-birth" onChange={(e) => setBirthDate(e.target.value)} type="date" value={birthDate} />
                         <label htmlFor="start-date">Start Date</label>
                         <input id="start-date" onChange={(e) => setStartDate(e.target.value)} type="date" value={startDate} />
-                    </fieldset>
+                    </div>
                     <fieldset className="address">
                         <legend>Address</legend>
                         <label htmlFor="street" >Street</label>
@@ -89,21 +99,14 @@ function Form() {
                         <label htmlFor="city" >City</label>
                         <input id="city" onChange={(e) => setCity(e.target.value)} value={city} />
                         <label htmlFor="state">State</label>
-                        <select name="state" id="state" onChange={(e) => setUsState(e.target.value)} defaultValue={"stateSelect"}>
-                            <option value="stateSelect" disabled >Select state</option>
+                        <select name="state" id="state" onChange={(e) => setUsState(e.target.value)}>
                         </select>
                         <label htmlFor="zip-code">Zip Code</label>
                         <input id="zip-code" type="number" onChange={(e) => setZipCode(e.target.value)} value={zipCode} />
-                        <label htmlFor="department">Department</label>
-                        <select name="department" id="department" onChange={(e) => setDepartment(e.target.value)} defaultValue={"deptSelect"}>
-                            <option value="deptSelect" disabled >Select department</option>
-                            <option>Sales</option>
-                            <option>Marketing</option>
-                            <option>Engineering</option>
-                            <option>Human Resources</option>
-                            <option>Legal</option>
-                        </select>
                     </fieldset>
+                    <label htmlFor="department">Department</label>
+                    <select name="department" id="department" onChange={(e) => setDepartment(e.target.value)}>
+                    </select>
                 </form>
                 <button className='btn' onClick={saveEmployee} type="submit">Save</button>
             </div>
