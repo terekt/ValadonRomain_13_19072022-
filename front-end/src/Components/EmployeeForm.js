@@ -10,23 +10,24 @@ function Form() {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [startDate, setStartDate] = useState('')
-    const [department, setDepartment] = useState('')
+    const [department, setDepartment] = useState('Sales')
     const [birthDate, setBirthDate] = useState('')
     const [street, setStreet] = useState('')
     const [city, setCity] = useState('')
-    const [usState, setUsState] = useState('')
+    const [usState, setUsState] = useState('AL')
     const [zipCode, setZipCode] = useState('')
 
     const dispatch = useDispatch()
 
-    const saveEmployee = () => {
+    function saveEmployee() {
+        console.log(firstName.length, lastName.length, department.length, street.length, city.length, usState.length, birthDate, startDate, zipCode)
         if (
             firstName.length < 2 ||
             lastName.length < 2 ||
-            department.length < 2 ||
-            street.length < 2 ||
+            department.length < 1 ||
+            street.length < 0 ||
             city.length < 2 ||
-            usState.length < 2 ||
+            usState.length < 0 ||
             birthDate === '' ||
             startDate === '' ||
             zipCode === ''
@@ -99,13 +100,13 @@ function Form() {
                         <label htmlFor="city" >City</label>
                         <input id="city" onChange={(e) => setCity(e.target.value)} value={city} />
                         <label htmlFor="state">State</label>
-                        <select name="state" id="state" onChange={(e) => setUsState(e.target.value)}>
+                        <select name="state" id="state" onChange={(e) => setUsState(e.target.value)} value={usState}>
                         </select>
                         <label htmlFor="zip-code">Zip Code</label>
                         <input id="zip-code" type="number" onChange={(e) => setZipCode(e.target.value)} value={zipCode} />
                     </fieldset>
                     <label htmlFor="department">Department</label>
-                    <select name="department" id="department" onChange={(e) => setDepartment(e.target.value)}>
+                    <select name="department" id="department" onChange={(e) => setDepartment(e.target.value)} value={department}>
                     </select>
                 </form>
                 <button className='btn' onClick={saveEmployee} type="submit">Save</button>
