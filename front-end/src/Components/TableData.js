@@ -2,15 +2,15 @@ function TableData(props) {
     const rows = props.rowsdata;
     const TableColumns = props.columndata;
 
-    var entrySelect = document.getElementById("entry");
-    var entryNumber = entrySelect.options[entrySelect.selectedIndex].value;
+//    var entrySelect = document.getElementById("entry");
+ //   var entryNumber = entrySelect.options[entrySelect.selectedIndex].value;
     //console.log(entryNumber);
 
     return (
         <>
             {rows.map((row, i) => {
                 return (
-                    <tr hover tabIndex={-1} key={i}>
+                    <tr hover key={i}>
                         {TableColumns.map((column) => {
                             const value = row[column.id];
                             return (
